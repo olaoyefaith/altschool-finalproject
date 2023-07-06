@@ -22,54 +22,53 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
-        run: >
-          # List of microservices modules and their Dockerfile paths
-
+        run: |
+          
           microservices:
             - name: adservice
-              dockerfile: ./src/adservice/Dockerfile
-              sourcefile: ./src/adservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/adservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/adservice
 
             - name: cartservice
-              dockerfile: ./src/cartservice/src/Dockerfile
-              sourcefile: ./src/checkoutservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/cartservice/src/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice
 
             - name: checkoutservice
-              dockerfile: ./src/checkoutservice/Dockerfile
-              sourcefile: ./src/checkoutservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice
 
             - name: currencyservice
-              dockerfile: ./src/currencyservice/Dockerfile
-              sourcefile: ./src/currencyservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/currencyservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/currencyservice
 
             - name: emailservice
-              dockerfile: ./src/emailservice/Dockerfile
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/emailservice/Dockerfile
               sourcefile: ./src/emailservice
 
             - name: frontend
               dockerfile: ./src/frontend/Dockerfile
-              sourcefile: ./src/frontend
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/frontend
 
             - name: loadgenerator
-              dockerfile: ./src/loadgenerator/Dockerfile
-              sourcefile: ./src/loadgenerator
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/loadgenerator/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/loadgenerator
 
             - name: paymentservice
-              dockerfile: ./src/paymentservice/Dockerfile
-              sourcefile: ./src/paymentservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/paymentservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/paymentservice
 
             - name: productcatalogservice
-              dockerfile: ./src/productcatalogservice/Dockerfile
-              sourcefile: ./src/productcatalogservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/productcatalogservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/productcatalogservice
 
             - name: recommendationservice
-              dockerfile: ./src/recommendationservice/Dockerfile
-              sourcefile: ./src/recommendationservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/recommendationservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/recommendationservice
 
 
             - name: shippingservice
-              dockerfile: ./src/shippingservice/Dockerfile
-              sourcefile: ./src/shippingservice
+              dockerfile: ./altschool-finalproject/altschool-finalproject/src/shippingservice/Dockerfile
+              sourcefile: ./altschool-finalproject/altschool-finalproject/src/shippingservice
 
 
               
@@ -79,9 +78,8 @@ jobs:
           # Build and push Docker containers for each microservice
 
 
-          for microservice in $microservices; do
-            cd $microservice[name]
-
-            docker buildx build --push --file $microservice[dockerfile] -t $CONTAINER_REGISTRY/$microservice[name] --build-arg DEPENDENCIES_FILE=$microservice[sourcefile] .
+          for microservice in "${microservices[@]}"; do
+            cd "${microservice[name]}"
+            docker buildx build --push --file "${microservice[dockerfile]}" -t "$CONTAINER_REGISTRY/${microservice[name]}" --build-arg DEPENDENCIES_FILE="${microservice[sourcefile]}" .
             cd ..
           done
