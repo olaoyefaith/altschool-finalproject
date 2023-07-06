@@ -27,49 +27,49 @@ jobs:
 
           microservices:
             - name: adservice
-              dockerfile: src/adservice/Dockerfile
-              sourcefile: src/adservice
+              dockerfile: src\adservice\Dockerfile
+              sourcefile: src\adservice
 
             - name: cartservice
-              dockerfile: src/cartservice/src/Dockerfile
-              sourcefile: src/checkoutservice
+              dockerfile: src\cartservice\src\Dockerfile
+              sourcefile: src\cartservice\src
 
             - name: checkoutservice
-              dockerfile: src/checkoutservice/Dockerfile
-              sourcefile: src/checkoutservice
+              dockerfile: src\checkoutservice\Dockerfile
+              sourcefile: src\checkoutservice
 
             - name: currencyservice
-              dockerfile: src/currencyservice/Dockerfile
-              sourcefile: src/currencyservice
+              dockerfile: src\currencyservice\Dockerfile
+              sourcefile: src\currencyservice
 
             - name: emailservice
-              dockerfile: src/emailservice/Dockerfile
-              sourcefile: src/emailservice
+              dockerfile: src\emailservice\Dockerfile
+              sourcefile: src\emailservice
 
             - name: frontend
-              dockerfile: src/frontend/Dockerfile
-              sourcefile: src/frontend
+              dockerfile: src\frontend\Dockerfile
+              sourcefile: src\frontend
 
             - name: loadgenerator
-              dockerfile: src/loadgenerator/Dockerfile
-              sourcefile: src/loadgenerator
-
+              dockerfile: src\loadgenerator\Dockerfile
+              sourcefile: src\loadgenerator
+            
             - name: paymentservice
-              dockerfile: src/paymentservice/Dockerfile
-              sourcefile: src/paymentservice
+              dockerfile: src\paymentservice\Dockerfile
+              sourcefile: src\paymentservice
 
             - name: productcatalogservice
-              dockerfile: src/productcatalogservice/Dockerfile
-              sourcefile: src/productcatalogservice
+              dockerfile: src\productcatalogservice\Dockerfile
+              sourcefile: src\productcatalogservice
 
             - name: recommendationservice
-              dockerfile: src/recommendationservice/Dockerfile
-              sourcefile: src/recommendationservice
+              dockerfile: src\recommendationservice\Dockerfile
+              sourcefile: src\recommendationservice
 
 
             - name: shippingservice
               dockerfile: src/shippingservice/Dockerfile
-              sourcefile: src/shippingservice
+              sourcefile: src\shippingservice
 
 
               
@@ -79,9 +79,8 @@ jobs:
           # Build and push Docker containers for each microservice
 
 
-          for microservice in $microservices; do
-            cd $microservice[name]
-
-            docker buildx build --push --file $microservice[dockerfile] -t $CONTAINER_REGISTRY/$microservice[name] --build-arg DEPENDENCIES_FILE=$microservice[sourcefile] .
+          for microservice in "${microservices[@]}"; do
+            cd "${microservice[name]}"
+            docker buildx build --push --file "${microservice[dockerfile]}" -t "$CONTAINER_REGISTRY/${microservice[name]}" --build-arg DEPENDENCIES_FILE="${microservice[sourcefile]}" .
             cd ..
           done
