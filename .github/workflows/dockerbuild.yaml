@@ -23,8 +23,25 @@ jobs:
           DOCKER_BUILDKIT: 1
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
         run: >
+          modules=(
+            "adservice:src/adservice/Dockerfile:src/adservice/build.gradle"
+            "cartservice:src/cartservice/src/Dockerfile:src/cartservice/src/appsettings.json"
+            "checkoutservice:src/checkoutservice/Dockerfile:src/checkoutservice/genproto.sh"
+            "currencyservice:src/currencyservice/Dockerfile:src/currencyservice/package.json"
+            "emailservice:src/emailservice/Dockerfile:src/emailservice/requirements.txt"
+            "frontend:src/frontend/Dockerfile:src/frontend"
+            "loadgenerator:src/loadgenerator/Dockerfile:src/loadgenerator"
+            "paymentservice:src/paymentservice/Dockerfile:src/paymentservice/package.json"
+            "productcatalogservice:src/productcatalogservice/Dockerfile:src/productcatalogservice/products.json"
+            "recommendationservice:src/recommendationservice/Dockerfile:src/recommendationservice/requirements.txt"
+            "shippingservice:src/shippingservice/Dockerfile:src/shippingservice"
+          )
 
-  
-          docker buildx build --push --file src\cartservice\src\Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest --build-arg DEPENDENCIES_FILE=src\cartservice\src .
-          
-           done
+
+          for module in "${modules[@]}"; do
+            IFS=':' read -r name dockerfile sourcefile <<< "$module"
+            export dockerfile
+            export name
+            export sourcefile
+            docker buildx build -f "$dockerfile" -t $CONTAINER_REGISTRY/$name --build-arg DEPENDENCIES_FILE="$sourcefile" .
+          done
