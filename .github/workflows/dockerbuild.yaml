@@ -35,7 +35,6 @@ jobs:
             "productcatalogservice:src/productcatalogservice/Dockerfile:src/productcatalogservice/products.json"
             "recommendationservice:src/recommendationservice/Dockerfile:src/recommendationservice/requirements.txt"
             "shippingservice:src/shippingservice/Dockerfile:src/shippingservice"
-            # Add more modules here...
           )
 
 
