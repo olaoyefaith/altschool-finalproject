@@ -24,28 +24,28 @@ jobs:
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
         run: >
           
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/adservice/Dockerfile -t "$CONTAINER_REGISTRY/adservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/adservice/Dockerfile -t "$CONTAINER_REGISTRY/adservice:latest
 
            
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/cartservice/src/Dockerfile -t "$CONTAINER_REGISTRY/cartservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/cartservice/src/Dockerfile -t "$CONTAINER_REGISTRY/cartservice:latest
            
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/checkoutservice/Dockerfile -t "$CONTAINER_REGISTRY/checkoutservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/checkoutservice/Dockerfile -t "$CONTAINER_REGISTRY/checkoutservice:latest
 
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/currencyservice/Dockerfile -t "$CONTAINER_REGISTRY/currencyservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/currencyservice/Dockerfile -t "$CONTAINER_REGISTRY/currencyservice:latest
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/emailservice/Dockerfile -t "$CONTAINER_REGISTRY/emailservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/emailservice/Dockerfile -t "$CONTAINER_REGISTRY/emailservice:latest
 
           docker buildx build --push --file ./src/frontend/Dockerfile -t "$CONTAINER_REGISTRY/frontend
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/loadgenerator/Dockerfile -t "$CONTAINER_REGISTRY/loadgenerator
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/loadgenerator/Dockerfile -t "$CONTAINER_REGISTRY/loadgenerator:latest
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/paymentservice/Dockerfile -t "$CONTAINER_REGISTRY/paymentservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/paymentservice/Dockerfile -t "$CONTAINER_REGISTRY/paymentservice:latest
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/productcatalogservice/Dockerfile -t "$CONTAINER_REGISTRY/productcatalogservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/productcatalogservice/Dockerfile -t "$CONTAINER_REGISTRY/productcatalogservice:latest
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/recommendationservice/Dockerfile -t "$CONTAINER_REGISTRY/recommendationservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/recommendationservice/Dockerfile -t "$CONTAINER_REGISTRY/recommendationservice:latest
 
-          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/shippingservice/Dockerfile -t "$CONTAINER_REGISTRY/shippingservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/shippingservice/Dockerfile -t "$CONTAINER_REGISTRY/shippingservice:latest
            
            done
