@@ -26,6 +26,6 @@ jobs:
          sudo su
 
             
-          docker buildx build --push -f src/shippingservice/Dockerfile -t $CONTAINER_REGISTRY/shippingservice:latest --build-arg DEPENDENCIES_FILE=src\shippingservice .
+          docker buildx build --push -f src/recommendationservice/Dockerfile -t $CONTAINER_REGISTRY/recommendationservice:latest --build-arg DEPENDENCIES_FILE=src\recommendationservice .
           
            done
