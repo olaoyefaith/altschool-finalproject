@@ -26,6 +26,6 @@ jobs:
          sudo su
 
             
-          docker buildx build --push -f src/frontend/Dockerfile -t $CONTAINER_REGISTRY/frontend:latest --build-arg DEPENDENCIES_FILE=src\frontend .
+          docker buildx build --push -f src/shippingservice/Dockerfile -t $CONTAINER_REGISTRY/shippingservice:latest --build-arg DEPENDENCIES_FILE=src\shippingservice .
           
            done
