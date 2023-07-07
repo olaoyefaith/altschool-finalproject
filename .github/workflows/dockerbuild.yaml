@@ -24,7 +24,7 @@ jobs:
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
         run: >
 
-
-          docker buildx build --push --file src\cartservice\src\Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest
+  
+          docker buildx build --push --file src\cartservice\src\Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest .
           
            done
