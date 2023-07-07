@@ -23,8 +23,9 @@ jobs:
           DOCKER_BUILDKIT: 1
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
         run: >
+         sudo su
 
-  
+            
           docker buildx build --push --file src\cartservice\src\Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest --build-arg DEPENDENCIES_FILE=src\cartservice\src .
           
            done
