@@ -43,5 +43,5 @@ jobs:
             export dockerfile
             export name
             export sourcefile
-            docker buildx build -f "$dockerfile" -t $CONTAINER_REGISTRY/$name --build-arg DEPENDENCIES_FILE="$sourcefile" .
+            docker buildx build --push -f "$dockerfile" -t $CONTAINER_REGISTRY/$name --build-arg DEPENDENCIES_FILE="$sourcefile" .
           done
