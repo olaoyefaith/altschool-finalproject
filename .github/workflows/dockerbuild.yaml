@@ -26,6 +26,6 @@ jobs:
          sudo su
 
             
-          docker buildx build --push --file src\cartservice\src\Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest --build-arg DEPENDENCIES_FILE=src\cartservice\src .
+          docker buildx build --push -f src/cartservice/src/Dockerfile -t $CONTAINER_REGISTRY/cartservice:latest --build-arg DEPENDENCIES_FILE=src\cartservice\src .
           
            done
