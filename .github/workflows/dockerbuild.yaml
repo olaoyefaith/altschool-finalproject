@@ -24,5 +24,5 @@ jobs:
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
         run: >
 
-          docker buildx build --file /src/adservice/Dockerfile -t "$CONTAINER_REGISTRY/adservice:latest .
+          docker buildx build --file /src/adservice/Dockerfile -t $CONTAINER_REGISTRY/adservice:latest .
            done
