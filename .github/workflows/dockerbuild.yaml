@@ -22,64 +22,30 @@ jobs:
         env:
           DOCKER_BUILDKIT: 1
           CONTAINER_REGISTRY: ghcr.io/${{ github.repository }}
-        run: |
+        run: >
           
-          microservices:
-            - name: adservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/adservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/adservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/adservice/Dockerfile -t "$CONTAINER_REGISTRY/adservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/adservice
 
-            - name: cartservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/cartservice/src/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice
-
-            - name: checkoutservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/checkoutservice
-
-            - name: currencyservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/currencyservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/currencyservice
-
-            - name: emailservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/emailservice/Dockerfile
-              sourcefile: ./src/emailservice
-
-            - name: frontend
-              dockerfile: ./src/frontend/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/frontend
-
-            - name: loadgenerator
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/loadgenerator/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/loadgenerator
-
-            - name: paymentservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/paymentservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/paymentservice
-
-            - name: productcatalogservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/productcatalogservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/productcatalogservice
-
-            - name: recommendationservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/recommendationservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/recommendationservice
+           
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/cartservice/src/Dockerfile -t "$CONTAINER_REGISTRY/cartservice --build-arg DEPENDENCIES_FILE=src\cartservice
+           
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/checkoutservice/Dockerfile -t "$CONTAINER_REGISTRY/checkoutservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/checkoutservice
 
 
-            - name: shippingservice
-              dockerfile: ./altschool-finalproject/altschool-finalproject/src/shippingservice/Dockerfile
-              sourcefile: ./altschool-finalproject/altschool-finalproject/src/shippingservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/currencyservice/Dockerfile -t "$CONTAINER_REGISTRY/currencyservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/currencyservice
 
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/emailservice/Dockerfile -t "$CONTAINER_REGISTRY/emailservice --build-arg DEPENDENCIES_FILE=./src/emailservice
 
-              
+          docker buildx build --push --file ./src/frontend/Dockerfile -t "$CONTAINER_REGISTRY/frontend --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/frontend
 
-            
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/loadgenerator/Dockerfile -t "$CONTAINER_REGISTRY/loadgenerator --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/loadgenerator
 
-          # Build and push Docker containers for each microservice
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/paymentservice/Dockerfile -t "$CONTAINER_REGISTRY/paymentservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/paymentservice
 
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/productcatalogservice/Dockerfile -t "$CONTAINER_REGISTRY/productcatalogservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/productcatalogservice
 
-          for microservice in "${microservices[@]}"; do
-            cd "${microservice[name]}"
-            docker buildx build --push --file "${microservice[dockerfile]}" -t "$CONTAINER_REGISTRY/${microservice[name]}" --build-arg DEPENDENCIES_FILE="${microservice[sourcefile]}" .
-            cd ..
-          done
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/recommendationservice/Dockerfile -t "$CONTAINER_REGISTRY/recommendationservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/recommendationservice
+
+          docker buildx build --push --file ./altschool-finalproject/altschool-finalproject/src/shippingservice/Dockerfile -t "$CONTAINER_REGISTRY/shippingservice --build-arg DEPENDENCIES_FILE=./altschool-finalproject/altschool-finalproject/src/recommendationservice .
+           
+           done
