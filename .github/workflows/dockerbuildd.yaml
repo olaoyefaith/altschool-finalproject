@@ -17,14 +17,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Go
+      - name: Setup Go - Product Catalog Service
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
-          working-directory: ${{ matrix.file-path }}
+        working-directory: ${{ matrix.file-path[0] }}
 
-      - name: Build
-        working-directory: ${{ matrix.file-path }}
+      - name: Setup Go - Shipping Service
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+        working-directory: ${{ matrix.file-path[1] }}
+
+      - name: Setup Go - Frontend
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+        working-directory: ${{ matrix.file-path[2] }}
+
+      - name: Setup Go - Checkout Service
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+        working-directory: ${{ matrix.file-path[3] }}
+
+      - name: Build and Test
         run: |
           go build -v ./...
           go test -v ./...
