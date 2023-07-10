@@ -40,6 +40,36 @@ jobs:
         with:
           go-version: 1.16
         working-directory: ${{ matrix.file-path[3] }}
+name: Do something with the matrix value
+
+on:
+  push:
+    branches:
+      - dockerbuildtest
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        file-path: [./productcatalogservice, ./shippingservice, ./frontend, ./checkoutservice]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Go and Build
+        run: |
+          for path in "${{ matrix.file-path }}"; do
+            cd $path
+            echo "Setting up Go in $path"
+            echo "::group::$path"
+            go build -v ./...
+            go test -v ./...
+            echo "::endgroup::"
+            cd ..
+          done
 
       - name: Build and Test
         run: |
