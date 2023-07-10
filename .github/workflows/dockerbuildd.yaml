@@ -1,0 +1,27 @@
+name: Do something with the matrix value
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        dir: [src\productcatalogservice, src\shippingservice, src\frontend,src\checkoutservice]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+
+      - name: Build
+        working-directory: ${{ matrix.dir }}
+        run: go build -v ./...
