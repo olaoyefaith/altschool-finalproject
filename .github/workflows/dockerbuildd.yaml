@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        file-path: [productcatalogservice, shippingservice, frontend, checkoutservice]
+        file-path: [./productcatalogservice, ./shippingservice, ./frontend, ./checkoutservice]
 
     steps:
       - name: Checkout code
