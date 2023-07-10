@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        file-path: [src\productcatalogservice, src\shippingservice, src\frontend, src\checkoutservice]
+        file-path: [src/productcatalogservice, src/shippingservice, src/frontend, src/checkoutservice]
         
     defaults:
       run:
