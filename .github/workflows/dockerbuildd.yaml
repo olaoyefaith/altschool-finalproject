@@ -12,6 +12,10 @@ jobs:
     strategy:
       matrix:
         file-path: [src\productcatalogservice, src\shippingservice, src\frontend, src\checkoutservice]
+        
+    defaults:
+      run:
+        working-directory: ./src
 
     steps:
       - name: Checkout code
