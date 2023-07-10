@@ -29,6 +29,7 @@ jobs:
       - name: C# Unit Tests
         timeout-minutes: 10
         run: |
+          cd ./src/cartservice
           dotnet test src/cartservice/
 
       - name: Go Unit Tests
