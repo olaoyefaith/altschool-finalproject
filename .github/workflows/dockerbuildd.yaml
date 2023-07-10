@@ -24,4 +24,4 @@ jobs:
 
       - name: Build
         working-directory: ${{ matrix.dir }}
-        run: go build -v ./...
+        run: go build -v ./..
