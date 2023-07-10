@@ -3,7 +3,7 @@ name: Do something with the matrix value
 on:
   push:
     branches:
-      - main
+      - dockerbuildtest
 
 jobs:
   build:
