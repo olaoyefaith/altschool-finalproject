@@ -3,23 +3,19 @@ name: Do something with the matrix value
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - main
-     paths: ['./src*','.github/workflows/dockerbuildd.yml']
-=======
       - dockerbuildtest
->>>>>>> f77f5d6d05357e7122ec6d1451220336970ce95a
 
 jobs:
   build:
     runs-on: ubuntu-latest
-     defaults:
+    
+    defaults:
       run:
         working-directory: ./src
     
     strategy:
       matrix:
-        dir: [productcatalogservice, shippingservice, frontend,checkoutservice]
+        dir: [productcatalogservice, shippingservice, frontend, checkoutservice]
 
     steps:
       - name: Checkout code
@@ -31,5 +27,4 @@ jobs:
           go-version: 1.16
 
       - name: Build
-        working-directory: ${{ matrix.dir }}
-        run: go build -v ./..
+        run: go build -v ${{ matrix.dir }}
