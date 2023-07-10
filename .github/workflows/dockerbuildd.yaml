@@ -26,17 +26,17 @@ jobs:
         with:
           go-version: '1.19'
 
+      - name: C# Unit Tests
+        timeout-minutes: 10
+        run: |
+          dotnet test src/cartservice/
+
       - name: Go Unit Tests
         timeout-minutes: 10
         run: |
-          for SERVICE in "shippingservice" "productcatalogservice"; do
+          cd ./src/shippingservice
             echo "Testing $SERVICE..."
             pushd src/$SERVICE
             go test
             popd
           done
-
-      - name: C# Unit Tests
-        timeout-minutes: 10
-        run: |
-          dotnet test src/cartservice/
