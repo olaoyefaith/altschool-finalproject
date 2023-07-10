@@ -3,7 +3,7 @@ name: Build and Push Docker Containers
 on:
   push:
     branches:
-      - dockerbuildtest
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
