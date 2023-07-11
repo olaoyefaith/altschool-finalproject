@@ -25,7 +25,6 @@ jobs:
       - name: Test
         timeout-minutes: 10
         run: |
-          cd cartservice/tests
           dotnet restore
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore --verbosity normal
@@ -38,7 +37,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd shippingservice
           go build -v ./...
           go test
         working-directory: shippingservice
@@ -50,7 +48,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd productcatalogservice
           go build -v ./...
           go test
         working-directory: productcatalogservice
