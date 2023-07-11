@@ -19,8 +19,8 @@ jobs:
       
       - name: C# Unit Tests
         run: |
-          cd cartservice/tests
-
+          cd cartservice/tests/cartservice.tests.csproj
+          
       - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
