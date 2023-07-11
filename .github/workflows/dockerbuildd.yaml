@@ -29,7 +29,7 @@ jobs:
           dotnet restore
           dotnet build --configuration Release --no-restore
           dotnet test --no-restore --verbosity normal
-        working-directory: ./src/cartservice/tests
+        working-directory: cartservice/tests
 
       - name: Setup Go
         uses: actions/setup-go@v4
@@ -41,7 +41,7 @@ jobs:
           cd shippingservice
           go build -v ./...
           go test
-        working-directory: ./src/shippingservice
+        working-directory: shippingservice
 
       - name: Setup Go
         uses: actions/setup-go@v4
@@ -53,7 +53,7 @@ jobs:
           cd productcatalogservice
           go build -v ./...
           go test
-        working-directory: ./src/productcatalogservice
+        working-directory: productcatalogservice
 
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -64,10 +64,10 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
         with:
-          path: ./src/adservice
+          path: adservice
 
       - name: Run the Gradle package task
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
           arguments: -b ci.gradle package
-          path: ./src/adservice
+          path: adservice
