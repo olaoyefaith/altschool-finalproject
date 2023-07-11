@@ -29,7 +29,10 @@ jobs:
   
       - name: Test
         timeout-minutes: 10
-        run: dotnet test --no-restore --verbosity normal
+        run: |
+            dotnet restore
+            dotnet build --configuration Release --no-restore
+            dotnet test --no-restore --verbosity normal
         working-directory: ./src/cartservice/tests
 
       - name: Go Unit Tests
@@ -41,8 +44,8 @@ jobs:
         with:
           go-version: '1.19'
       - name: Install dependencies
-        run: go get .
-      - name: Build
-        run: go build -v ./...
-      - name: Test with the Go CLI
-        run: go test
+        run: |
+              go get .
+              go build -v ./...
+              go test
+        working-directory: ./src/shippingservice
