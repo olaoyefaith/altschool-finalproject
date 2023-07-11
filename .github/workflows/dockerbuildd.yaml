@@ -8,6 +8,11 @@ on:
 jobs:
   unit_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '6.0.x' ]
+        go-version: [ '1.14', '1.15', '1.16.x' ]
+
     defaults:
       run:
         working-directory: ./src
@@ -15,29 +20,40 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      - name: C# Unit Tests
+        run: |
+          cd src/cartservice/src
 
-      - name: Setup .NET
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0'
-
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '1.19'
-
-      - name: C# Unit Tests
+          dotnet-version: ${{ matrix.dotnet-version }}
+     
+      - name: Install dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+     
+      - name: Test
         timeout-minutes: 10
-        run: |
-          cd ./src/cartservice
-          dotnet test src/cartservice/
+        run: dotnet test --no-restore --verbosity normal
 
       - name: Go Unit Tests
-        timeout-minutes: 10
         run: |
-          cd ./src/shippingservice
-            echo "Testing $SERVICE..."
-            pushd src/$SERVICE
-            go test
-            popd
-          done
+          cd src/shippingservice
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Test with Go
+        run: go test -json > TestResults-${{ matrix.go-version }}.json
+      
+      - name: Upload Go test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Go-results-${{ matrix.go-version }}
+          path: TestResults-${{ matrix.go-version }}.json
