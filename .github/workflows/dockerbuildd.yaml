@@ -26,9 +26,6 @@ jobs:
         with:
           dotnet-version: '7.0.x'
      
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-     
       - name: Test
         timeout-minutes: 10
         run: dotnet test --no-restore --verbosity normal
