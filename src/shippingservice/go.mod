@@ -1,4 +1,4 @@
-module github.com/olaoyefaith/altschool-finalproject/src/shippingservice
+module github.com/GoogleCloudPlatform/microservices-demo/src/shippingservice
 
 go 1.19
 
